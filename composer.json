@@ -1,0 +1,12 @@
+{
+    "autoload": {
+        "classmap": ["."]
+    },
+    "require": {
+      "ext-json": "*",
+      "ext-pdo": "*",
+        "google/apiclient": "^2.8",
+        "twig/twig": "^3.0",
+        "mailjet/mailjet-apiv3-php": "^1.5"
+    }
+}
