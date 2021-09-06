@@ -5,10 +5,10 @@ use PDOException;
 
 class Database{
     private static $isSqlsrv = true;
-    private static $db_host = '54.195.208.184, 1433';
+    private static $db_host = '54.234.164.63, 1433';
     private static $db_name = 'obesitydb';
-    private static $db_username = 'obesity';
-    private static $db_password = '36W7T4~e-e';
+    private static $db_username = 'SA';
+    private static $db_password = 'Admin007';
 
     public static function dbConnection() : ?PDO{
         try{
