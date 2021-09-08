@@ -7,7 +7,12 @@ use App\Repository\UserRepository;
 use DateTime;
 
 
-class Activiy {
+class Activity {
+
+    /**
+     * @var int
+     */
+    private $activity_id;
 
     /**
      * @var int
@@ -43,7 +48,11 @@ class Activiy {
      * Constructor Entity Activity
      */
     public function __construct(){
-        $this->timestamp_creation = new DateTime();
+       // $this->timestamp_creation = new DateTime();
+    }
+
+    public function getActivityId(){
+        return $this->activity_id;
     }
 
     public function getUserId(){
@@ -51,7 +60,7 @@ class Activiy {
     }
 
     public function getTimestampCreation(): ?DateTime {
-        return $this->timestamp_creation;
+        return $this->timestamp_creation->date_format('Y-d-m');
     }
 
     public function getType(): ?string{
@@ -68,6 +77,11 @@ class Activiy {
         return $this->training_id;
     }    
 
+
+    public function setActivityId(int $activity_id): self{
+        $this->activity_id = $activity_id;
+        return $this;
+    }
 
     public function setUserId(int $user_id): self{
         $this->user_id = $user_id;
@@ -99,6 +113,12 @@ class Activiy {
         return $this;
     }
 
+    public function getUser(): ?User{
+        if(is_null($this->user)){
+            $this->user = UserRepository::getOne($this->getUserId());
+        }
+        return $this->user;
+    }
 
 
 }
