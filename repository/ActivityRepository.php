@@ -46,7 +46,7 @@ class ActivityRepository {
    }
 
 
-   public static function getLastActivityByUser(User $user) {
+   public static function getLastActivityByUser($user) {
      $results=[];
 
       $connexion = Database::dbConnection();
@@ -56,7 +56,7 @@ class ActivityRepository {
 
  
       if(!is_null($user)){
-        $statement->bindValue(':user_id', $user->getUserId(),PDO::PARAM_STR);
+        $statement->bindValue(':user_id', $user,PDO::PARAM_STR);
       }
 
       $statement->execute();
