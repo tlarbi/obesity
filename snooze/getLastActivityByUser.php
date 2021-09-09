@@ -15,15 +15,16 @@ header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers
 $returnData = [];
 
 $user = UserService::getCurrentUser();
-
-if(is_null($user)){
-    $returnData = Utils::msg(0,401,"Unauthorized");
-}elseif($_SERVER["REQUEST_METHOD"] != "GET"){
+$data = json_decode(file_get_contents("php://input"), true);
+// if(is_null($user)){
+//     $returnData = Utils::msg(0,401,"Unauthorized");
+// }else
+if($_SERVER["REQUEST_METHOD"] != "GET"){
     $returnData = Utils::msg(0,404,'Page Not Found!');
 } 
 else {
     $returnData = Utils::msg(1,201,"Success");
-    $result = ActivityRepository::getLastActivityByUser($user);
+    $result = ActivityRepository::getLastActivityByUser($data['user_id']);
     $returnData["last_activity"] = is_null($result) ? null : $result;
 }
 

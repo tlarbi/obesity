@@ -18,9 +18,10 @@ $returnData = [];
 
 
 $user = UserService::getCurrentUser();
-if(is_null($user)){
-    $returnData = Utils::msg(0,401,"Unauthorized");
-}elseif($_SERVER["REQUEST_METHOD"] != "POST"){
+// if(is_null($user)){
+//     $returnData = Utils::msg(0,401,"Unauthorized");
+// }else
+if($_SERVER["REQUEST_METHOD"] != "POST"){
     $returnData = Utils::msg(0,404,'Page Not Found!');
 }else{
     $form = json_decode(file_get_contents("php://input"), true);

@@ -19,14 +19,15 @@ $data = json_decode(file_get_contents("php://input"), true);
 
 
 $user = UserService::getCurrentUser();
-if(is_null($user)){
-    $returnData = Utils::msg(0,401,"Unauthorized");
-}elseif($_SERVER["REQUEST_METHOD"] != "GET"){
+// if(is_null($user)){
+//     $returnData = Utils::msg(0,401,"Unauthorized");
+// }else
+if($_SERVER["REQUEST_METHOD"] != "GET"){
     $returnData = Utils::msg(0,404,'Page Not Found!');
 } else {
     $returnData = Utils::msg(1,201,"Success");
-    if (isset($data['start']) && isset($data['end']) && !is_null($user)) {
-        $result = ActivityRepository::getActivity($user, $data['start'], $data['end']);
+    if (isset($data['start']) && isset($data['end']) && isset($data['user_id'])) {
+        $result = ActivityRepository::getActivity($data['user_id'], $data['start'], $data['end']);
     }
     $returnData["activity"] = is_null($result) ? null : $result;
 }
