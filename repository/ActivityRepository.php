@@ -12,7 +12,7 @@ use DateTime;
 
 class ActivityRepository { 
 
-   public static function getActivity($user_id, $start_date, $end_date) { 
+   public static function getActivity(User $user, $start_date, $end_date) { 
 
      $results=[];
 
@@ -26,12 +26,10 @@ class ActivityRepository {
      if(!is_null($start_date)) {
         $statement->bindValue(':start_create', $start_date,PDO::PARAM_STR);
         $statement->bindValue(':end_date', $end_date,PDO::PARAM_STR);
-        $statement->bindValue(':user_id', $user_id,PDO::PARAM_STR);
      }
 
      if(!is_null($user)){
-         // With Token user id 
-        //$statement->bindValue(':user_id', $user->getUserId(),PDO::PARAM_STR);
+        $statement->bindValue(':user_id', $user->getUserId(),PDO::PARAM_STR);
      }
 
      $statement->execute();
@@ -48,7 +46,7 @@ class ActivityRepository {
    }
 
 
-   public static function getLastActivityByUser($user) {
+   public static function getLastActivityByUser(User $user) {
      $results=[];
 
       $connexion = Database::dbConnection();
@@ -58,8 +56,8 @@ class ActivityRepository {
 
  
       if(!is_null($user)){
-        $statement->bindValue(':user_id', $user,PDO::PARAM_STR);
-      }
+        $statement->bindValue(':user_id', $user->getUserId(),PDO::PARAM_STR);
+     }
 
       $statement->execute();
 

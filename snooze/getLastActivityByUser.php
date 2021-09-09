@@ -16,15 +16,14 @@ $returnData = [];
 
 $user = UserService::getCurrentUser();
 
-//if(is_null($user)){
-//    $returnData = Utils::msg(0,401,"Unauthorized");
-//}
-if($_SERVER["REQUEST_METHOD"] != "GET"){
+if(is_null($user)){
+    $returnData = Utils::msg(0,401,"Unauthorized");
+}elseif($_SERVER["REQUEST_METHOD"] != "GET"){
     $returnData = Utils::msg(0,404,'Page Not Found!');
 } 
 else {
     $returnData = Utils::msg(1,201,"Success");
-    $result = ActivityRepository::getLastActivityByUser('302');
+    $result = ActivityRepository::getLastActivityByUser($user);
     $returnData["last_activity"] = is_null($result) ? null : $result;
 }
 
