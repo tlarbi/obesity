@@ -27,8 +27,8 @@ if($_SERVER["REQUEST_METHOD"] != "GET"){
 } else {
     //$date_creation = isset($data['date']) ? new DateTime($data['date']) : new DateTime();
     $returnData = Utils::msg(1,201,"Success");
-    if (isset($data['start']) && $data['end']) {
-        $result = ActivityRepository::getActivity($data['start'], $data['end']);
+    if (isset($data['start']) && isset($data['end']) && isset($data['user_id'])) {
+        $result = ActivityRepository::getActivity($data['user_id'], $data['start'], $data['end']);
     }
     //$result = ActivityRepository::getActivity($data['date']);
     $returnData["activity"] = is_null($result) ? null : $result;
