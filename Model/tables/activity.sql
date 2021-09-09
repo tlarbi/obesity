@@ -1,6 +1,5 @@
 CREATE TABLE [activity](
-	[activity] [int] IDENTITY(1,1) NOT NULL,
-	[activity_id] [int] NULL,
+	[activity_id] [int] IDENTITY(1,1) NOT NULL,
 	[user_id] [int] NULL,
 	[timestamp_creation] [date] NOT NULL,
 	[type] [varchar](max) NULL,

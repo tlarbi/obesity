@@ -81,17 +81,13 @@ class ActivityRepository {
 
      $connexion = Database::dbConnection();
     
-     $query = (Database::isSqlsrv()?"INSERT INTO activity ([activity_id],[user_id], [timestamp_creation], [type], [survey_id], [tip_id], [training_id]) VALUES(:activity_id,:user_id,:timestamp_creation,:type,:survey_id,:tip_id,:training_id)"
-        :"INSERT INTO `activity` (`activity_id`,`user_id`, `timestamp_creation`, `type`, `survey_id`, `tip_id`, `training_id`) VALUES(:activity_id,:user_id,:timestamp_creation,:type,:survey_id,:tip_id,:training_id)");
+     $query = (Database::isSqlsrv()?"INSERT INTO activity ([user_id], [timestamp_creation], [type], [survey_id], [tip_id], [training_id]) VALUES(:user_id,:timestamp_creation,:type,:survey_id,:tip_id,:training_id)"
+        :"INSERT INTO `activity` (`user_id`, `timestamp_creation`, `type`, `survey_id`, `tip_id`, `training_id`) VALUES(:user_id,:timestamp_creation,:type,:survey_id,:tip_id,:training_id)");
 
      $statement = $connexion->prepare($query);  
 
 
      try {
-
-        if(isset($form['activity_id'])) {
-            $statement->bindValue(':activity_id', $form['activity_id'], PDO::PARAM_BOOL);
-        }
 
         if(isset($form['user_id'])) {
           $statement->bindValue(':user_id', $form['user_id'], PDO::PARAM_BOOL);
